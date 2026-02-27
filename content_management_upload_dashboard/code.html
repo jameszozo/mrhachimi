@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Content Management &amp; Upload Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee79",
+                        "primary-hover": "#22bd61",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#102217",
+                        "surface-dark": "#183223",
+                        "surface-dark-hover": "#20422e",
+                        "neutral-dark": "#92c9a8",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Spline Sans', sans-serif; }
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #102217;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #183223;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #20422e;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex overflow-hidden selection:bg-primary selection:text-background-dark">
+<!-- Sidebar Navigation -->
+<nav class="hidden md:flex flex-col w-64 h-screen bg-surface-dark border-r border-white/5 shrink-0 z-20">
+<div class="flex flex-col h-full p-4 gap-6">
+<!-- User Profile / Brand -->
+<div class="flex items-center gap-3 px-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 shrink-0 shadow-lg shadow-black/20" data-alt="User profile picture of a dog" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_JvWTOccVeKSKwFl4SiryEdPx2bEj4hfVWGcckQ-9qkWWKJFhfCWC1jSMUC9u17MtRhiLS6_3wME3LD_F8HbTUDDhqKJVg77SN9Je2CWuwjJBGEj-HcqqNmp75rlcob1zHwP-CycEWpgLQtuFsQboVR0pLxTHJ-okNc7P5QOJ0SpjCApCZsEDzKa1EDZsY6Qt82JHjp2t4q-VcaJPTQkof56xRZsN33-hpNgEMf4Vj-Mf93ISuz12-d_ryxbFpg6n48kRqDieWH4");'></div>
+<div class="flex flex-col overflow-hidden">
+<h1 class="text-white text-base font-semibold truncate">My Music</h1>
+<p class="text-neutral-dark text-xs font-medium">Admin Dashboard</p>
+</div>
+</div>
+<!-- Main Navigation -->
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-dark hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">home</span>
+<span class="text-sm font-medium">Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-dark hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">search</span>
+<span class="text-sm font-medium">Search</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-dark hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">library_music</span>
+<span class="text-sm font-medium">Your Library</span>
+</a>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-1 mt-2 pt-4 border-t border-white/5">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-dark hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<div class="p-1 bg-white/10 rounded-sm group-hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</div>
+<span class="text-sm font-medium">Create Playlist</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/20 text-primary border border-primary/20 shadow-sm shadow-primary/5" href="#">
+<span class="material-symbols-outlined text-[24px] fill-1">cloud_upload</span>
+<span class="text-sm font-bold">Upload Content</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-dark hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<div class="p-1 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-sm">
+<span class="material-symbols-outlined text-[18px] text-white">favorite</span>
+</div>
+<span class="text-sm font-medium">Liked Songs</span>
+</a>
+</div>
+<!-- Storage Info -->
+<div class="mt-auto px-3 py-4 bg-background-dark rounded-xl border border-white/5">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-medium text-white">Storage</span>
+<span class="text-xs text-neutral-dark">12.4 GB / 50 GB</span>
+</div>
+<div class="w-full bg-white/10 rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 25%"></div>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-background-dark relative">
+<!-- Top Header (Mobile Nav Trigger + User) -->
+<header class="h-16 flex items-center justify-between px-6 bg-background-dark/80 backdrop-blur-md sticky top-0 z-10 border-b border-white/5">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-white p-2 hover:bg-white/10 rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-sm">
+<span class="text-neutral-dark">Dashboard</span>
+<span class="material-symbols-outlined text-neutral-dark text-xs">chevron_right</span>
+<span class="text-white font-medium">Upload Track</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-neutral-dark hover:text-white transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-background-dark"></span>
+</button>
+<button class="flex items-center gap-2 bg-black/40 hover:bg-black/60 pr-4 pl-1 py-1 rounded-full transition-colors border border-white/5">
+<div class="w-7 h-7 rounded-full bg-cover bg-center" data-alt="User avatar small" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDPcWLPnlUnN27GyETZpayf5E7TSpUBLmUX-8wpuLWbxDYRcy5VLcIWAvHqmXVLA4bslZB5u14J46fChrssto3tCCPAzZpywYsCHYz8ktuUEXh7mdhNbc8zrCNakFGW3AWSQeccGh0Tuh8b7tilBCdIiGHH7LbvZoFTZsIaHsGxnxHc1DjYwLxjc2ZoO698ke9fnq6CzadMVUnhFfJ1rwxXFydBX7pI_HeRu1V4NPpaPbrErKPpKhEnnN484C4gMyrxyybd_1u11R8')"></div>
+<span class="text-sm font-medium text-white">Admin</span>
+<span class="material-symbols-outlined text-base text-neutral-dark">arrow_drop_down</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-6 md:p-8 lg:px-12 pb-24">
+<div class="max-w-5xl mx-auto space-y-8">
+<!-- Page Title Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">Upload New Track</h1>
+<p class="text-neutral-dark text-base">Add music to your personal collection and manage metadata.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-full border border-white/10 text-white text-sm font-semibold hover:bg-white/5 transition-colors">
+                            Cancel
+                        </button>
+<button class="px-6 py-2 rounded-full bg-primary text-background-dark text-sm font-bold hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all hover:scale-105">
+                            Publish Track
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: File Uploads & Artwork -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Album Artwork Upload -->
+<div class="bg-surface-dark rounded-xl p-5 border border-white/5">
+<h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">image</span>
+                                Cover Artwork
+                            </h3>
+<div class="aspect-square w-full relative group cursor-pointer overflow-hidden rounded-lg bg-[#112218] border-2 border-dashed border-white/10 hover:border-primary/50 transition-colors flex flex-col items-center justify-center text-center p-6">
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10 backdrop-blur-sm">
+<span class="text-white font-medium bg-black/50 px-4 py-2 rounded-full">Change Image</span>
+</div>
+<span class="material-symbols-outlined text-4xl text-neutral-dark mb-2 group-hover:scale-110 transition-transform">add_photo_alternate</span>
+<p class="text-sm text-neutral-dark">Upload Cover</p>
+<p class="text-xs text-white/40 mt-1">Min 300x300px</p>
+</div>
+</div>
+<!-- Audio File Dropzone -->
+<div class="bg-surface-dark rounded-xl p-5 border border-white/5 flex-1">
+<h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">audio_file</span>
+                                Audio Source
+                            </h3>
+<div class="h-full min-h-[200px] rounded-lg bg-[#112218] border-2 border-dashed border-primary/30 hover:bg-primary/5 transition-colors flex flex-col items-center justify-center text-center p-6 cursor-pointer">
+<div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-2xl">upload_file</span>
+</div>
+<p class="text-white font-medium mb-1">Drag and drop audio</p>
+<p class="text-sm text-neutral-dark mb-4">MP3, WAV, FLAC (Max 50MB)</p>
+<button class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors">
+                                    Browse Files
+                                </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Metadata Form -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Basic Info Card -->
+<div class="bg-surface-dark rounded-xl p-6 border border-white/5">
+<h3 class="text-xl text-white font-bold mb-6">Track Metadata</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="md:col-span-2">
+<label class="block text-xs font-medium text-neutral-dark uppercase tracking-wider mb-2">Song Title</label>
+<input class="w-full bg-[#112218] border-none rounded-lg px-4 py-3 text-white placeholder-white/20 focus:ring-2 focus:ring-primary/50 text-base" placeholder="e.g. Blinding Lights" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-medium text-neutral-dark uppercase tracking-wider mb-2">Artist Name</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-white/30 text-[20px]">person</span>
+<input class="w-full bg-[#112218] border-none rounded-lg pl-10 pr-4 py-3 text-white placeholder-white/20 focus:ring-2 focus:ring-primary/50 text-sm" placeholder="e.g. The Weeknd" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-xs font-medium text-neutral-dark uppercase tracking-wider mb-2">Album Name</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-white/30 text-[20px]">album</span>
+<input class="w-full bg-[#112218] border-none rounded-lg pl-10 pr-4 py-3 text-white placeholder-white/20 focus:ring-2 focus:ring-primary/50 text-sm" placeholder="e.g. After Hours" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-xs font-medium text-neutral-dark uppercase tracking-wider mb-2">Genre</label>
+<select class="w-full bg-[#112218] border-none rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 text-sm appearance-none cursor-pointer">
+<option>Pop</option>
+<option>Rock</option>
+<option>Hip Hop</option>
+<option>Electronic</option>
+<option>R&amp;B</option>
+<option>Classical</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-medium text-neutral-dark uppercase tracking-wider mb-2">Release Year</label>
+<input class="w-full bg-[#112218] border-none rounded-lg px-4 py-3 text-white placeholder-white/20 focus:ring-2 focus:ring-primary/50 text-sm" placeholder="2023" type="number"/>
+</div>
+</div>
+</div>
+<!-- Lyrics & Description -->
+<div class="bg-surface-dark rounded-xl p-6 border border-white/5">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl text-white font-bold">Lyrics</h3>
+<div class="flex gap-2">
+<button class="text-xs flex items-center gap-1 text-primary hover:text-primary-hover font-medium px-2 py-1 rounded bg-primary/10 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[14px]">upload</span>
+                                        Upload .LRC
+                                     </button>
+</div>
+</div>
+<div class="relative">
+<textarea class="w-full bg-[#112218] border-none rounded-lg px-4 py-3 text-white placeholder-white/20 focus:ring-2 focus:ring-primary/50 text-sm font-mono leading-relaxed resize-none" placeholder="Paste lyrics here or upload an LRC file..." rows="8"></textarea>
+<div class="absolute bottom-3 right-3 text-xs text-neutral-dark bg-surface-dark px-2 py-1 rounded">
+                                    Sync disabled
+                                </div>
+</div>
+<div class="mt-6 pt-6 border-t border-white/5">
+<div class="flex items-center gap-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded border border-white/30 group-hover:border-primary flex items-center justify-center bg-[#112218]">
+<span class="material-symbols-outlined text-primary text-sm opacity-0 check-icon">check</span>
+</div>
+<input class="hidden peer" id="explicit-check" onchange="this.parentElement.querySelector('.check-icon').style.opacity = this.checked ? '1' : '0'" type="checkbox"/>
+<span class="text-sm text-neutral-dark group-hover:text-white select-none">Explicit Content</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded border border-white/30 group-hover:border-primary flex items-center justify-center bg-[#112218]">
+<span class="material-symbols-outlined text-primary text-sm opacity-0 check-icon-2">check</span>
+</div>
+<input class="hidden peer" onchange="this.parentElement.querySelector('.check-icon-2').style.opacity = this.checked ? '1' : '0'" type="checkbox"/>
+<span class="text-sm text-neutral-dark group-hover:text-white select-none">Public Track</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer area - mostly for padding/visual balance at bottom -->
+<div class="mt-12 text-center">
+<p class="text-white/20 text-xs">© 2023 My Music Collection. All rights reserved.</p>
+</div>
+</div>
+</main>
+<!-- Upload Progress Widget (Floating) -->
+<div class="fixed bottom-6 right-6 z-50 w-80 bg-[#181818] rounded-xl shadow-2xl border border-white/10 overflow-hidden hidden md:block">
+<div class="p-3 bg-[#282828] flex items-center justify-between border-b border-white/5">
+<span class="text-white text-xs font-bold uppercase tracking-wider pl-1">Recent Uploads</span>
+<button class="text-neutral-dark hover:text-white"><span class="material-symbols-outlined text-base">close</span></button>
+</div>
+<div class="p-2">
+<!-- Item 1: Complete -->
+<div class="flex items-center gap-3 p-2 hover:bg-white/5 rounded-lg group">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<div class="flex-1 overflow-hidden">
+<p class="text-white text-xs font-medium truncate">Midnight City.mp3</p>
+<p class="text-neutral-dark text-[10px]">Complete</p>
+</div>
+<span class="text-neutral-dark text-[10px]">3.4MB</span>
+</div>
+<!-- Item 2: Uploading -->
+<div class="flex items-center gap-3 p-2 hover:bg-white/5 rounded-lg relative overflow-hidden">
+<!-- Progress Bar Background -->
+<div class="absolute bottom-0 left-0 h-[2px] bg-primary w-[60%] z-10"></div>
+<span class="material-symbols-outlined text-white/50 text-lg animate-pulse">cloud_upload</span>
+<div class="flex-1 overflow-hidden z-20">
+<p class="text-white text-xs font-medium truncate">Levitating_Remix.wav</p>
+<p class="text-primary text-[10px]">Uploading... 60%</p>
+</div>
+<button class="text-neutral-dark hover:text-white z-20"><span class="material-symbols-outlined text-base">pause</span></button>
+</div>
+</div>
+</div>
+</body></html>
